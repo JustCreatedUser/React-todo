@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 16px !important;
+}
+ul {
+  list-style: none;
+  display: contents;
+}
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  background-color: #0d0714;
+}
+main {
+  display: flex;
+  flex-direction: column;
+
+  gap: 60px;
+}
+.todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.completed li textarea {
+  color: green;
+  text-decoration: line-through;
+}
+.empty {
+  display: none;
+}
+li {
+  color: #9e78cf;
+  background: #15101c;
+  padding: 30px 20px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+#root {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  padding-top: 10vw;
+}
+textarea {
+  resize: none;
+  border: none;
+  background-color: transparent;
+}
+.new-todo {
+  height: 40px;
+  width: clamp(200px, 80vw, 350px);
+  border: 1px solid #3e1671;
+  border-radius: 10px;
+  padding: 10px 15px;
+}
+.new-todo::-webkit-scrollbar {
+  display: none;
+}
+.add {
+  background-color: #9e78cf;
+  border-radius: 10px;
+  height: 40px;
+  aspect-ratio: 1/1;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+header {
+  display: flex;
+  gap: 11px;
+}
+.todo-text:focus {
+  outline: none;
+}
+.todo-text {
+  color: rgb(158, 120, 207);
+}
+li button {
+  background-color: transparent;
+  height: fit-content;
+  border: none;
+  color: rgb(158, 120, 207);
+  cursor: pointer;
+}
+.todo-actions {
+  display: flex;
+  gap: 10px;
+}
