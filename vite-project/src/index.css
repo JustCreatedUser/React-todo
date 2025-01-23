@@ -46,7 +46,17 @@ li {
   width: 100vw;
   height: 100vh;
   justify-content: center;
-  padding-top: 10vw;
+  padding-top: clamp(50px, 10vw, 70px);
+}
+select {
+  position: absolute;
+  top: 10px;
+  background: #3e1671;
+  border: none;
+  border-radius: 10px;
+  padding: 4px;
+  right: 10px;
+  cursor: pointer;
 }
 textarea {
   resize: none;

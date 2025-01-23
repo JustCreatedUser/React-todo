@@ -1,4 +1,7 @@
 import { TodoI } from "../App";
+import { useContext } from "react";
+import langContext from "./ContextLang";
+import lang from "../lang";
 interface TodoListProps {
   inputValue: string;
   className: string;
@@ -11,6 +14,7 @@ export default function TodoList({
   todos,
   setTodos,
 }: TodoListProps) {
+  const context = useContext(langContext);
   const statuses = {
     completed: true,
     uncompleted: false,
@@ -25,8 +29,10 @@ export default function TodoList({
       }
     >
       <h3>
-        {className === "completed" ? "Completed" : "Uncompleted"} -{" "}
-        {rightTodos.length}
+        {className === "completed"
+          ? lang[context.type as keyof typeof lang].completed
+          : lang[context.type as keyof typeof lang].uncompleted}
+        - {rightTodos.length}
       </h3>
       <ul>
         {rightTodos.map((todo) => (
@@ -34,6 +40,7 @@ export default function TodoList({
             <textarea
               className="todo-text"
               rows={1}
+              value={todo.text}
               onChange={(e) => {
                 setTodos(
                   todos.map((t) =>
@@ -43,9 +50,7 @@ export default function TodoList({
                 e.target.style.height = "auto";
                 e.target.style.height = e.target.scrollHeight + "px";
               }}
-            >
-              {todo.text}
-            </textarea>
+            ></textarea>
             <div className="todo-actions">
               <button
                 onClick={() =>
