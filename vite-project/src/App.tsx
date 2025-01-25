@@ -40,7 +40,9 @@ function App() {
     ]);
   };
   return (
-    <langContext.Provider value={{ language: lang, theme: "dark" }}>
+    <langContext.Provider
+      value={{ language: lang, theme: "dark", globalData: data }}
+    >
       <main
         style={
           {
@@ -50,13 +52,11 @@ function App() {
       >
         <CustomSelect
           selected={lang}
-          data={data.languages}
           stateFn={setLang}
           className="lang-select"
         />
         <CustomSelect
           selected={theme}
-          data={data.themes}
           stateFn={setTheme}
           className="theme-select"
         />

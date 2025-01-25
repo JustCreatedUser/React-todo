@@ -1,2 +1,7 @@
 import { createContext } from "react";
-export default createContext({ language: "en", theme: "dark" });
+import data from "../data";
+export default createContext({
+  language: "en",
+  theme: "dark",
+  globalData: data,
+});
