@@ -1,7 +1,7 @@
 import { TodoI } from "../App";
 import { useContext } from "react";
-import langContext from "./ContextLang";
-import lang from "../lang";
+import langContext from "./GlobalContext";
+import data from "../data";
 interface TodoListProps {
   inputValue: string;
   className: string;
@@ -30,8 +30,10 @@ export default function TodoList({
     >
       <h3>
         {className === "completed"
-          ? lang[context.type as keyof typeof lang].completed
-          : lang[context.type as keyof typeof lang].uncompleted}
+          ? data.languages[context.language as keyof typeof data.languages]
+              .completed
+          : data.languages[context.language as keyof typeof data.languages]
+              .uncompleted}
         - {rightTodos.length}
       </h3>
       <ul>

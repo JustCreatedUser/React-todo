@@ -1,24 +1,31 @@
 import TodoList from "./components/TodoList";
 import { useEffect, useState } from "react";
-import language from "./lang";
+import data from "./data";
 export interface TodoI {
   id: string;
   text: string;
   done: boolean;
   priority: number;
 }
-import langContext from "./components/ContextLang";
+import langContext from "./components/GlobalContext";
+import CustomSelect from "./components/CustomSelect";
 function App() {
   const [todos, setTodos] = useState([] as TodoI[]);
-  const [lang, setLang] = useState("en");
+  const [lang, setLang] = useState(localStorage.getItem("lang") || "en");
+  const [inputValue, setInputValue] = useState("");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
   useEffect(() => {
     localStorage.setItem("todos", JSON.stringify(todos));
   }, [todos]);
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+  useEffect(() => {
+    localStorage.setItem("lang", lang);
+  }, [lang]);
   const localTodos = localStorage.getItem("todos")!;
   if (todos.length === 0 && localTodos && JSON.parse(localTodos).length !== 0)
     setTodos(JSON.parse(localStorage.getItem("todos")!));
-
-  const [inputValue, setInputValue] = useState("");
 
   const addTodo = () => {
     setInputValue("");
@@ -33,22 +40,34 @@ function App() {
     ]);
   };
   return (
-    <langContext.Provider value={{ type: lang }}>
-      <main>
-        <select onChange={(e) => setLang(e.target.value)}>
-          {Object.keys(language).map((key) => (
-            <option key={key} value={key}>
-              {key}
-            </option>
-          ))}
-        </select>
+    <langContext.Provider value={{ language: lang, theme: "dark" }}>
+      <main
+        style={
+          {
+            "--theme": data.themes[theme as keyof typeof data.themes],
+          } as React.CSSProperties
+        }
+      >
+        <CustomSelect
+          selected={lang}
+          data={data.languages}
+          stateFn={setLang}
+          className="lang-select"
+        />
+        <CustomSelect
+          selected={theme}
+          data={data.themes}
+          stateFn={setTheme}
+          className="theme-select"
+        />
         <header>
           <textarea
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             className="new-todo"
             placeholder={
-              language[lang as keyof typeof language].inputPlaceholder
+              data.languages[lang as keyof typeof data.languages]
+                .inputPlaceholder
             }
           ></textarea>
           <button onClick={addTodo} className="add">

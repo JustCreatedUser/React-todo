@@ -13,7 +13,6 @@ ul {
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
-  background-color: #0d0714;
 }
 main {
   display: flex;
@@ -21,26 +20,50 @@ main {
 
   gap: 60px;
 }
+h3 {
+  color: var(--clr2);
+}
 .todo-list {
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 .completed li textarea {
-  color: green;
+  color: var(--clr7);
   text-decoration: line-through;
 }
 .empty {
   display: none;
 }
 li {
-  color: #9e78cf;
-  background: #15101c;
+  color: var(--clr6);
+  background: var(--clr3);
   padding: 30px 20px;
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
 }
+#root:has([style="--theme: dark;"]) {
+  background-color: #0d0714;
+  --clr1: #3e1671;
+  --clr2: #fff;
+  --clr3: #15101c;
+  --clr4: rgb(158, 120, 207);
+  --clr5: rgb(158, 120, 207);
+  --clr6: #9e78cf;
+  --clr7: green;
+}
+#root:has([style="--theme: light;"]) {
+  background-color: #fbfbf2;
+  --clr2: #847577;
+  --clr3: #847577;
+  --clr4: #fbfbf2;
+  --clr1: #a6a2a2;
+  --clr5: #e5e6e4;
+  --clr6: #a6a2a2;
+  --clr7: #fffa9f;
+}
+
 #root {
   display: flex;
   width: 100vw;
@@ -48,15 +71,21 @@ li {
   justify-content: center;
   padding-top: clamp(50px, 10vw, 70px);
 }
-select {
+.lang-select,
+.theme-select {
+  background: var(--clr1);
   position: absolute;
-  top: 10px;
-  background: #3e1671;
   border: none;
   border-radius: 10px;
   padding: 4px;
-  right: 10px;
   cursor: pointer;
+  top: 10px;
+}
+.lang-select {
+  right: 10px;
+}
+.theme-select {
+  left: 10px;
 }
 textarea {
   resize: none;
@@ -64,9 +93,10 @@ textarea {
   background-color: transparent;
 }
 .new-todo {
+  color: var(--clr2);
   height: 40px;
   width: clamp(200px, 80vw, 350px);
-  border: 1px solid #3e1671;
+  border: 1px solid var(--clr1);
   border-radius: 10px;
   padding: 10px 15px;
 }
@@ -74,7 +104,7 @@ textarea {
   display: none;
 }
 .add {
-  background-color: #9e78cf;
+  background-color: var(--clr6);
   border-radius: 10px;
   height: 40px;
   aspect-ratio: 1/1;
@@ -90,13 +120,13 @@ header {
   outline: none;
 }
 .todo-text {
-  color: rgb(158, 120, 207);
+  color: var(--clr4);
 }
 li button {
   background-color: transparent;
   height: fit-content;
   border: none;
-  color: rgb(158, 120, 207);
+  color: var(--clr4);
   cursor: pointer;
 }
 .todo-actions {
